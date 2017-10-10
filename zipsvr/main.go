@@ -36,6 +36,12 @@ func main() {
 		addr = ":80" // in terminal: export ADDR=localhost:4000
 	}
 
+	tlskey := os.Getenv("TLSKEY")
+	tlscert := os.Getenv("TLSCERT")
+	if len(tlskey) == 0 || len(tlscert) == 0 {
+		log.Fatal("please set TLSKEY and TLSCERT")
+	}
+
 	// load zips.csv
 	zips, err := models.LoadZips("zips.csv")
 	if err != nil {
