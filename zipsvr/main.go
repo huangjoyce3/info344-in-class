@@ -33,7 +33,8 @@ func memoryHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	addr := os.Getenv("ADDR") // environment vars are caps by convention
 	if len(addr) == 0 {
-		addr = ":80" // in terminal: export ADDR=localhost:4000
+		//addr = ":80" // in terminal: export ADDR=localhost:4000
+		addr = ":443" // default for https
 	}
 
 	tlskey := os.Getenv("TLSKEY")
@@ -69,5 +70,5 @@ func main() {
 	mux.Handle(zipsPath, cityHandler)
 
 	fmt.Printf("server is listening at http://%s\n", addr) // echo that we are listening at this address
-	log.Fatal(http.ListenAndServe(addr, mux))
+	log.Fatal(http.ListenAndServeTLS(addr, tlscert, tlskey, mux))
 }

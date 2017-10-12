@@ -1,3 +1,10 @@
 #!/usr/bin/env bash
-set -e
-docker run -d -p 80:80 huangjoyce3/zipsvr
+docker rm -f zipsvr
+
+docker run -d \
+-p 443:443 \
+--name zipsvr \
+-v $(pwd)/tls:/tls:ro \
+-e TLSCERT=/tls/fullchain.pem \
+-e TLSKEY=/tls/privkey.pem \
+huangjoyce3/zipsvr
