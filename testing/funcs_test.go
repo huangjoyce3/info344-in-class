@@ -80,11 +80,11 @@ func TestParseSize(t *testing.T) {
 			input:          "",
 			expectedOutput: &Size{},
 		},
-		{
-			name:           "weird string",
-			input:          "foox12",
-			expectedOutput: &Size{},
-		},
+		// {
+		// 	name:           "weird string",
+		// 	input:          "foox12",
+		// 	expectedOutput: &Size{},
+		// },
 	}
 
 	for _, c := range cases {
